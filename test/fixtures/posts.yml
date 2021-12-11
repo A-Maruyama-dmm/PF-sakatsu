@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  sauna_name: MyString
+  address: MyText
+  url: MyText
+  sauna_image_id: MyString
+  sauna_temperature: 1
+  water_bath_temperature: 1
+  outside_air_bath: 1
+  congestion: 1
+  time_zorn: 1
+  vending_machine: 1
+  comprehensive_evaluation: 1
+  admin: false
+
+two:
+  user_id: 1
+  sauna_name: MyString
+  address: MyText
+  url: MyText
+  sauna_image_id: MyString
+  sauna_temperature: 1
+  water_bath_temperature: 1
+  outside_air_bath: 1
+  congestion: 1
+  time_zorn: 1
+  vending_machine: 1
+  comprehensive_evaluation: 1
+  admin: false

@@ -1,6 +1,14 @@
 class ApplicationController < ActionController::Base
   # ユーザー認証などが行われる前に、configure~が実行される
   before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  def after_sign_in_path_for(resource)
+   root_path
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 
   protected
 
