@@ -10,18 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_094805) do
+ActiveRecord::Schema.define(version: 2021_12_13_111730) do
 
-  create_table "admins", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -30,14 +33,14 @@ ActiveRecord::Schema.define(version: 2021_12_10_094805) do
     t.text "address"
     t.text "url"
     t.string "sauna_image_id"
-    t.integer "sauna_temperature"
-    t.integer "water_bath_temperature"
-    t.integer "outside_air_bath"
-    t.integer "congestion"
-    t.integer "time_zorn"
-    t.integer "vending_machine"
-    t.integer "comprehensive_evaluation"
-    t.boolean "admin"
+    t.string "sauna_temperature"
+    t.string "water_bath_temperature"
+    t.string "outside_air_bath"
+    t.string "congestion"
+    t.string "time_zorn"
+    t.string "vending_machine"
+    t.float "comprehensive_evaluation"
+    t.boolean "authorization"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_12_10_094805) do
     t.string "sauna_years"
     t.string "number_of_sets"
     t.string "image_id"
-    t.boolean "admin"
+    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

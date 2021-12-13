@@ -7,24 +7,28 @@ Rails.application.routes.draw do
 
 
   #管理者用
-  devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-}
+  #devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
+  #sessions: "admin/sessions"
+#}
+
+  root to: 'user/homes#top'
+  get 'homes/about' => 'user/homes#about'
 
 
   # 会員側のルーティング設定
-  scope module: :user do
-  root to: 'homes#top'
-  get '/about' => 'homes#about'
-  resources :post, only: [:new, :index, :show, :edit, :destroy]
+
+  resources :user, only: [:index, :show, :edit, :update] do
+    member do
+      get :followings, :followers
+    end
+
+  resources :relationships, only: [:create, :destroy]
   end
 
-
-  # 管理者側のルーティング設定
-  namespace :admin do
-    get '/' => 'homes#top'
-
+  resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
+    resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
+    get 'authorization', as: 'authorization'
   end
 
-
-end
+  end

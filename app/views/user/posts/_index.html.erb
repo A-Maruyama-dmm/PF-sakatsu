@@ -1,0 +1,43 @@
+<table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.each do |posts| %>
+      <tr>
+        <td><%= link_to posts_path(posts.user) do %>
+          <%= attachment_image_tag posts.user, :image_id, :fill, 50, 50, fallback: "no-image-icon.jpg"%>
+          <% end %>
+        </td>
+        <td><%= link_to posts.title, posts_path(posts), class: "post_#{posts.id}" %></td>
+        <td><%= posts.post_name %></td>
+        <td><%= posts.address %></td>
+        <td><%= posts.url %></td>
+        <td><%= posts.sauna_image_id %></td>
+        <td><%= posts.url %></td>
+        <td><%= posts.sauna_tempereture %></td>
+        <td><%= posts.water_bath_temperature %></td>
+        <td><%= posts.outside_air_bath %></td>
+        <td><%= posts.congestion %></td>
+        <td><%= posts.time_zorn %></td>
+        <td><%= posts.vending_machine %></td>
+        <td><%= posts.time_zorn %></td>
+        <td><%= posts.comprehensive_evaluation %></td>
+        
+        
+
+        <td><%= link_to "#{posts.comments.count} コメント", posts_path(posts.id) %></td>
+
+        <td id="favorite_buttons_<%= posts.id %>">
+　　　    <%= render "likes/like-btn", posts: posts %>
+　　    </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
