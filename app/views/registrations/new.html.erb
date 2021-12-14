@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row mt-4 ml-2">
+    <div class="col-md-auto offset-sm-1" style="background-color: #EEEEEE;">
+      <h4>新規会員登録</h4>
+    </div>
+  </div>
+
+<%= form_with model: @user, url: user_registration_path,id: 'new_user', class: 'new_user', local: true do |f| %>
+  <%= render "user/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label "氏名" %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "メールアドレス" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "年齢"%><br />
+    <%= f.text_field :age, autofocus: true, autocomplete: "age" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :sauna_year,"サウナ歴" %><br />
+    <%= f.select :sauna_year,[["1年目", "1年目"], ["2年目", "2年目"], ["3年目", "3年目"],["4年目", "4年目"],["5年目", "5年目"],["6年目", "6年目"],["7年目", "7年目"],["8年目", "8年目"],["9年目", "9年目"],["10年以上", "10年目"]], include_blank: "選択して下さい",class:"form-control" %>
+
+  <div class="form-group">
+    <%= f.label :number_of_sets,"セット回数（交代浴）" %><br />
+    <%= f.select :number_of_sets,[["1回", "1回"], ["2回", "2回"], ["3回", "3回"],["4回以上", "4回以上"]], include_blank: "選択して下さい",class:"form-control" %>
+
+  <div class="form-group">
+    <%= "プロフィール画像" %>
+    <%= f.attachment_field :image%>
+
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+<%= render "user/shared/links" %>

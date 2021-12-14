@@ -13,11 +13,12 @@ Rails.application.routes.draw do
 
   root to: 'user/homes#top'
   get 'homes/about' => 'user/homes#about'
+  get 'user/mypage' => 'user#mypage'
 
 
   # 会員側のルーティング設定
 
-  resources :user, only: [:index, :show, :edit, :update] do
+  resources :users, only: [:index, :show, :edit, :update,] do
     member do
       get :followings, :followers
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_111730) do
+ActiveRecord::Schema.define(version: 2021_12_13_181125) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 2021_12_13_111730) do
     t.string "vending_machine"
     t.float "comprehensive_evaluation"
     t.boolean "authorization"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "evaluation"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follow_id"
+    t.integer "follower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

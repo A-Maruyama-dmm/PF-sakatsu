@@ -1,7 +1,16 @@
-class User::UsersController < ApplicationController
+class UsersController < ApplicationController
 
-  def my_page
+  before_action :authenticate_user!, only: [:mypage, :index, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
 
+  def index
+    @users = User.all
+    @post = Post.new
+  end
+
+
+  def mypage
+    redirect_to user_path(current_user)
   end
 
   def show
@@ -29,10 +38,6 @@ class User::UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
-    @post = Post.new
-  end
 
   def followings
     @user = User.find(params[:id])
@@ -47,7 +52,12 @@ class User::UsersController < ApplicationController
 
   private
 
+
+  def set_user
+    @user = User.find([:id])
+  end
+
   def user_params
-    params.require(:user).permit(:name, :age, :sauna_yesrs, :number_of_sets, :image_id, :admin)
+    params.require(:user).permit(:name, :age, :sauna_yesrs, :number_of_sets, :image, :admin)
   end
 end
