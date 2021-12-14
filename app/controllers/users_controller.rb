@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @posts = @user.posts
     @post = Post.new
   end
@@ -54,7 +53,7 @@ class UsersController < ApplicationController
 
 
   def set_user
-    @user = User.find([:id])
+    @user = User.find(params[:id])
   end
 
   def user_params

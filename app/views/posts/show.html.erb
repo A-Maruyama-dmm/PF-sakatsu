@@ -1,37 +1,88 @@
 
+<div class='container'>
+  <div class='row'>
+      <%#= render 'users/info', user: @book.user  %>
+      <%#= render 'books/form', book: @book %>
+    <div class='col-md-12 offset-md-1'>
+  		<h2>Book detail</h2>
+  		<table class='table'>
+  		  <tr>
+  		    <td><%= link_to "ユーザー", users_path %>
+            <td><%= attachment_image_tag(@post, :sauna_image, :fill, 100, 100, fallback: "no_image.jpg") %><br></td>
+            <td><%= @post.authorization %></td>
+            <td><%= @post.user.name %></td>
+            <td><%= @post.sauna_name %></td>
+            <td><%= @post.address %></td>
+            <td><%= @post.url %></td>
+            <td><%= @post.sauna_temperature %></td>
+            <td><%= @post.water_bath_temperature %></td>
+            <td><%= @post.outside_air_bath %></td>
+            <td><%= @post.congestion %></td>
+            <td><%= @post.time_zorn %></td>
+            <td><%= @post.vending_machine %></td>
+            <td><%= @post.comprehensive_evaluation %></td>
+            <td><%= @post.vending_machine %></td>
+
+            <td class="post_evaluation" data-score="<%= @post.evaluation %>"></td>
 
 
+          <% end %>
+
+          </td>
+
+          <td><%#= link_to @book.title, book_path(@book) %></td>
+          <td><%#= @book.body %></td>
+          <% if current_user.id == @user.id %>
+          <td><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></td>
+          <td><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}"%></td>
+          <% end %>
+      </table>
 
 
-<div>
-<p>コメント件数：<%= @post.comments.count %></p>
-<% @post.comments.each do |post| %>
-  <p><%= image_tag('sample-author1.jpg') %></p>
-  <%= comment.user.name %>
-  <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-  <% if comment.user == current_user %>
-  <div>
-    <%= link_to "削除", comment_path(comment.post, comment), method: :delete %>
+        <div>
+        <p>コメント件数：<%= @post.comments.count %></p>
+        <% @post.comments.each do |post| %>
+          <p><%= image_tag('sample-author1.jpg') %></p>
+          <%= comment.user.name %>
+          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+          <% if comment.user == current_user %>
+          <div>
+            <%= link_to "削除", comment_path(comment.post, comment), method: :delete %>
+          </div>
+          <% end %>
+          <% if @post.liked_by?(current_user) %>
+            <p>
+              <%= link_to post_likes_path(@post), method: :delete do %>
+                ♥<%= @post.likes.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to post_likes_path(@post), method: :post do %>
+                ♡<%= @post.likes.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
+        <% end %>
+        </div>
+        <div>
+
+        <%#= form_with(model:[@post, @comment], local: true) do |f| %>
+          <%#= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+          <%#= f.submit "送信する" %>
+        <%# end %>
+
+        </div>
+
+    </div>
+    </div>
   </div>
-  <% end %>
-  <% if @post.liked_by?(current_user) %>
-    <p>
-      <%= link_to post_likes_path(@post), method: :delete do %>
-        ♥<%= @post.likes.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_likes_path(@post), method: :post do %>
-        ♡<%= @post.likes.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-<% end %>
-</div>
-<div>
-<%= form_with(model:[@post, @comment], local: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "送信する" %>
-<% end %>
-</div>
+  <script>
+  $('.post_evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

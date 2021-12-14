@@ -18,3 +18,29 @@
  @import 'font-awesome';
 
 
+.fixed_btn {
+ position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 6px 40px;
+
+}
+.new_btn{
+ font-size: 80px;
+ color: blue;
+
+  &:hover{
+   color:red;
+  }
+}
+
+.header{
+ width: 100%;
+ position: fixed;
+ top: 0;
+ z-index:999;//999階にいるイメージ
+}
+
+.main{
+ margin-top: 79px;
+}
