@@ -54,6 +54,19 @@ class PostsController < ApplicationController
     end
   end
 
+  def change_auth
+
+    redirect_to posts_path and return unless current_user.admin
+
+    post = Post.find(params[:id])
+    if post.authorization
+      post.update(authorization: false)
+    else
+      post.update(authorization: true)
+    end
+    redirect_to posts_path
+  end
+
   private
 
   def post_params

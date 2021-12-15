@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_104707) do
+ActiveRecord::Schema.define(version: 2021_12_15_120400) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_104707) do
     t.datetime "updated_at", null: false
     t.float "evaluation"
     t.boolean "authorization", default: false, null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "relationships", force: :cascade do |t|

@@ -6,9 +6,36 @@
       <td><%= post.sauna_name %></td>
       <% end %>
       <td><%= post.url %></td>
-      <td><%= post.evaluation %></td>
-      <td><%= post.authorization %></td>
+      <td class="post_evaluation" data-score="<%= post.evaluation %>"></td>
+      <td>
+        <% if current_user.admin %>
+          <%= link_to posts_change_auth_path(id: post.id) do %>
+            <% if post.authorization %>
+              <i class="fas fa-star"></i>
+            <% else %>
+              <i class="far fa-star"></i>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% if post.authorization %>
+            <i class="fas fa-star"></i>
+          <% else %>
+            <i class="far fa-star"></i>
+          <% end %>
+        <% end %>
+      </td>
 　    <td><%= link_to 'Show', post_path(post), class: "post_#{post.id}" %></td>
   </tr>
 </div>
 <% end %>
+
+
+  <script>
+  $('.post_evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+　</script>

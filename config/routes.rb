@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   end
 
+  get '/posts/change_auth', to: 'posts#change_auth'
+
   resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]

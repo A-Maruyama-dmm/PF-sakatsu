@@ -3,13 +3,29 @@
   <div class='row'>
       <%#= render 'users/info', user: @book.user  %>
       <%#= render 'books/form', book: @book %>
-    <div class='col-md-12 offset-md-1'>
-  		<h2>Book detail</h2>
+    <div class='col-md-12 '>
+  		<h2>ユーザー</h2>
   		<table class='table'>
   		  <tr>
   		    <td><%= link_to "ユーザー", users_path %>
             <td><%= attachment_image_tag(@post, :sauna_image, :fill, 100, 100, fallback: "no_image.jpg") %><br></td>
-            <td><%= @post.authorization %></td>
+            <td>
+              <% if current_user.admin %>
+                <%= link_to posts_change_auth_path(id: @post.id) do %>
+                  <% if @post.authorization %>
+                    <i class="fas fa-star"></i>
+                  <% else %>
+                    <i class="far fa-star"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% if @post.authorization %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+            </td>
             <td><%= @post.user.name %></td>
             <td><%= @post.sauna_name %></td>
             <td><%= @post.address %></td>
@@ -22,12 +38,7 @@
             <td><%= @post.vending_machine %></td>
             <td><%= @post.comprehensive_evaluation %></td>
             <td><%= @post.vending_machine %></td>
-
             <td class="post_evaluation" data-score="<%= @post.evaluation %>"></td>
-
-
-          <% end %>
-
           </td>
 
           <td><%#= link_to @book.title, book_path(@book) %></td>
@@ -36,6 +47,7 @@
           <td><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></td>
           <td><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}"%></td>
           <% end %>
+        </tr>
       </table>
 
 
@@ -66,14 +78,11 @@
         <% end %>
         </div>
         <div>
-
         <%#= form_with(model:[@post, @comment], local: true) do |f| %>
           <%#= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
           <%#= f.submit "送信する" %>
         <%# end %>
-
         </div>
-
     </div>
     </div>
   </div>
@@ -85,4 +94,4 @@
     },
     path: '/assets/'
   });
-</script>
+　</script>
