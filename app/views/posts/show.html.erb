@@ -1,14 +1,13 @@
 
-<div class='container'>
+<div class='container px-5 px-sm-0'>
   <div class='row'>
-      <%#= render 'users/info', user: @book.user  %>
-      <%#= render 'books/form', book: @book %>
-    <div class='col-md-12 '>
-  		<h2>ユーザー</h2>
-  		<table class='table'>
+    <div class='col-md-12'>
+
+  		<h2>投稿</h2>
+  		<table class='table table-hover table-inverse'>
   		  <tr>
   		    <td><%= link_to "ユーザー", users_path %>
-            <td><%= attachment_image_tag(@post, :sauna_image, :fill, 100, 100, fallback: "no_image.jpg") %><br></td>
+            <td><%= attachment_image_tag(@post, :sauna_image, :fill, 100, 100, fallback: "no_image.jpg") %></br></td>
             <td>
               <% if current_user.admin %>
                 <%= link_to posts_change_auth_path(id: @post.id) do %>
@@ -40,7 +39,27 @@
             <td><%= @post.vending_machine %></td>
             <td class="post_evaluation" data-score="<%= @post.evaluation %>"></td>
           </td>
-
+          <td>
+            <%= form_with(model:[@post, @comment], local: true) do |f| %>
+            <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+            <% end %>
+          </td>
+　　　　　<td>
+　　　　　  <% if @post.liked_by?(current_user) %>
+            <p>
+              <%= link_to post_like_path(@post, @post.liked(current_user)), method: :delete do %>
+                ♥<%= @post.likes.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to post_likes_path(@post), method: :post do %>
+                ♡<%= @post.likes.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
+　　　　　</td>
           <td><%#= link_to @book.title, book_path(@book) %></td>
           <td><%#= @book.body %></td>
           <% if current_user.id == @user.id %>
@@ -53,37 +72,22 @@
 
         <div>
         <p>コメント件数：<%= @post.comments.count %></p>
-        <% @post.comments.each do |post| %>
-          <p><%= image_tag('sample-author1.jpg') %></p>
+        <% @post.comments.each do |comment| %>
+          <p><%= attachment_image_tag @post, :sauna_image %></p>
           <%= comment.user.name %>
           <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
           <% if comment.user == current_user %>
           <div>
-            <%= link_to "削除", comment_path(comment.post, comment), method: :delete %>
+            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+          <% end %>
           </div>
-          <% end %>
-          <% if @post.liked_by?(current_user) %>
-            <p>
-              <%= link_to post_likes_path(@post), method: :delete do %>
-                ♥<%= @post.likes.count %> いいね
-              <% end %>
-            </p>
-            <% else %>
-            <p>
-              <%= link_to post_likes_path(@post), method: :post do %>
-                ♡<%= @post.likes.count %> いいね
-              <% end %>
-            </p>
-          <% end %>
+
         <% end %>
+
+
         </div>
         <div>
-        <%#= form_with(model:[@post, @comment], local: true) do |f| %>
-          <%#= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-          <%#= f.submit "送信する" %>
-        <%# end %>
         </div>
-    </div>
     </div>
   </div>
   <script>

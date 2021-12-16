@@ -1,2 +1,2 @@
-class User::RelationshipsController < ApplicationController
+class RelationshipsController < ApplicationController
 end

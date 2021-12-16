@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   registrations: "user/registrations",
   sessions: 'user/sessions'
 }
-
-
   #管理者用
   #devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
   #sessions: "admin/sessions"

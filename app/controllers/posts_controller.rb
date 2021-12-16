@@ -24,6 +24,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comments = current_user.comments.new
     @posts = Post.all
     @user = @post.user
     @new_post = Post.new
@@ -55,7 +57,6 @@ class PostsController < ApplicationController
   end
 
   def change_auth
-
     redirect_to posts_path and return unless current_user.admin
 
     post = Post.find(params[:id])
@@ -70,7 +71,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:sauna_name, :address, :url, :sauna_image_id, :sauna_temperature, :water_bath_temperature, :outside_air_bath, :congestion, :time_zorn, :vending_machine, :evaluation)
+    params.require(:post).permit(:sauna_name, :address, :url, :sauna_image, :sauna_temperature, :water_bath_temperature, :outside_air_bath, :congestion, :time_zorn, :vending_machine, :evaluation, :comment, :likes)
   end
 
 
