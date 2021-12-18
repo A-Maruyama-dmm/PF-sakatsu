@@ -73,9 +73,9 @@
         <div>
         <p>コメント件数：<%= @post.comments.count %></p>
         <% @post.comments.each do |comment| %>
-          <p><%= attachment_image_tag @post, :sauna_image %></p>
-          <%= comment.user.name %>
-          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+          <%= comment.created_at.strftime('%Y/%m/%d') %></br>
+          <%= comment.comment %>
+          by<%= comment.user.name %>
           <% if comment.user == current_user %>
           <div>
             <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
