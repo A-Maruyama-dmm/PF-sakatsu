@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     resources :comments, only: [:create, :destroy]
-    resources :likes, only: [:create, :destroy]
+    resource :likes, only: [:create, :destroy]
     get 'authorization', as: 'authorization'
   end
 

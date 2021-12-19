@@ -45,21 +45,7 @@
             <%= f.submit "送信する" %>
             <% end %>
           </td>
-　　　　　<td>
-　　　　　  <% if @post.liked_by?(current_user) %>
-            <p>
-              <%= link_to post_like_path(@post, @post.liked(current_user)), method: :delete do %>
-                ♥<%= @post.likes.count %> いいね
-              <% end %>
-            </p>
-            <% else %>
-            <p>
-              <%= link_to post_likes_path(@post), method: :post do %>
-                ♡<%= @post.likes.count %> いいね
-              <% end %>
-            </p>
-          <% end %>
-　　　　　</td>
+　　　　　<td id="like_buttons_<%= @post.id %>" nowrap><%= render "likes/likes", post: @post %></td>
           <td><%#= link_to @book.title, book_path(@book) %></td>
           <td><%#= @book.body %></td>
           <% if current_user.id == @user.id %>
