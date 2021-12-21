@@ -6,8 +6,8 @@
   		<h2>投稿</h2>
   		<table class='table table-hover table-inverse'>
   		  <tr>
-  		    <td><%= link_to "ユーザー", users_path %>
-            <td><%= attachment_image_tag(@post, :sauna_image, :fill, 100, 100, fallback: "no_image.jpg") %></br></td>
+  		    <td><%= link_to "ユーザー一覧", users_path %>
+            <td><%= attachment_image_tag(@post, :sauna_image, :fill, 300, 300, fallback: "no_image.jpg") %></br></td>
             <td>
               <% if current_user.admin %>
                 <%= link_to posts_change_auth_path(id: @post.id) do %>
@@ -49,8 +49,8 @@
           <td><%#= link_to @book.title, book_path(@book) %></td>
           <td><%#= @book.body %></td>
           <% if current_user.id == @user.id %>
-          <td><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></td>
-          <td><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}"%></td>
+          <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></td>
+          <td><%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}"%></td>
           <% end %>
         </tr>
       </table>
