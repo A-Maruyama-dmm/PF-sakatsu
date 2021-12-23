@@ -12,13 +12,9 @@
             <td><%= @user.sauna_years %></td>
             <td><%= @user.number_of_sets%></td>
           </td>
-
-          <td><%#= link_to @book.title, book_path(@book) %></td>
-          <td><%#= @book.body %></td>
           <% if current_user.id == @user.id %>
           <td><%= link_to 'Edit', edit_user_path(@user), class: "btn btn-sm btn-success edit_user_#{@user.id}" %></td>
           <td><%= link_to 'Destroy', user_path(@user), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@user.id}"%></td>
           <% end %>
       </table>
-      
-      
+

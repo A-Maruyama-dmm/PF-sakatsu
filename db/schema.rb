@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_120400) do
+ActiveRecord::Schema.define(version: 2021_12_23_054233) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
     t.integer "user_id"
     t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone_number", null: false
+    t.integer "subject", default: 0, null: false
+    t.text "message", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_120400) do
     t.string "time_zorn"
     t.string "vending_machine"
     t.float "comprehensive_evaluation"
+    t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "evaluation"
@@ -61,9 +72,9 @@ ActiveRecord::Schema.define(version: 2021_12_15_120400) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.integer "age"
     t.string "sauna_years"
     t.string "number_of_sets"

@@ -24,6 +24,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    gon.post = @post
     @comment = Comment.new
     @comments = current_user.comments.new
     @posts = Post.all
@@ -36,7 +37,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to post_path
+    redirect_to posts_path
   end
 
   def edit

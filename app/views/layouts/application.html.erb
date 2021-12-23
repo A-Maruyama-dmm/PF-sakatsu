@@ -4,7 +4,7 @@
     <title>Sakatsu</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= include_gon %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" type="text/css" href="css/5-1-14.css">
@@ -21,11 +21,12 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
-                <li class="nav-item nav-link text-dark" style="margin-right: 50px;">ようこそ、<%#= @users.name %>さん！</li>
+                <li class="nav-item nav-link text-dark" style="margin-right: 50px;">ようこそ、<%= current_user.name %>さん！</li>
                 <li class="nav-item border rounded-lg" style="margin-right: 20px;"><%= link_to "About", homes_about_path, class: 'nav-link text-dark' %></li>
                 <li class="nav-item border rounded-lg" style="margin-right: 20px;"><%= link_to "Mypage", user_path(current_user), class: 'nav-link text-dark' %></li>
                 <li class="nav-item border rounded-lg" style="margin-right: 20px;"><%= link_to "User", users_path, class: 'nav-link text-dark' %></li>
                 <li class="nav-item border rounded-lg" style="margin-right: 20px;"><%= link_to "Post", posts_path, class: 'nav-link text-dark' %></li>
+                <li class="nav-item border rounded-lg" style="margin-right: 20px;"><%= link_to "お問い合わせ", new_contact_path, class: 'nav-link text-dark' %></li>
                 <% if current_user.admin %>
                 <li class="nav-item border rounded-lg" style="margin-right: 20px;"><%= link_to "管理者", posts_path, class: 'nav-link text-dark' %></li>
                 <% end %>

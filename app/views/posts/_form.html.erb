@@ -1,7 +1,7 @@
 <%= form_with model: post, local: true do |f| %>
 
   <div class="field">
-    <%= f.label "名前" %><br />
+    <%= f.label "施設名" %><br />
     <%= f.text_field :sauna_name, autofocus: true, autocomplete: "sauna_name" %>
   </div></br>
 
@@ -45,8 +45,8 @@
   </div></br>
 
   <div class="form-group">
-    <%= f.label :congestion,"瓶自動販売機" %><br />
-    <%= f.select :congestion,[["ある", "ある"], ["ない", "ない"]], include_blank: "選択して下さい",class:"form-control" %>
+    <%= f.label :vending_machine,"瓶自動販売機" %><br />
+    <%= f.select :vending_machine,[["ある", "ある"], ["ない", "ない"]], include_blank: "選択して下さい",class:"form-control" %>
   </div></br>
 
   <div id="evaluate_stars">
@@ -54,7 +54,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "更新" %>
+    <%= f.submit "投稿" %>
   </div>
 <% end %>
 <script>
