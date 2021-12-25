@@ -45,8 +45,19 @@ header{
  margin-top: 79px;
 }
 
+.navbar {
+background-image: image-url("banner-ge39f4e4ef_1920.jpg");
 
-body {
-  background-image: image-url("hoge.jpg");
 }
 
+body {
+background-image: image-url("hardwood-g92324e1c6_1920.jpg");
+height: 800px;
+background-size: cover;
+position: relative;
+}
+
+.d-flex {
+ font-family:monospace;
+ font-size: 20px;
+}

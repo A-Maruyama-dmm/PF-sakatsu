@@ -25,6 +25,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -35,6 +41,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
 
 
   def followings
@@ -56,6 +63,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :age, :sauna_yesrs, :number_of_sets, :image, :admin)
+    params.require(:user).permit(:name, :age, :sauna_years, :number_of_sets, :image, :admin)
   end
 end

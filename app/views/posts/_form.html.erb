@@ -1,3 +1,7 @@
+<div class='container px-5 px-sm-3'>
+  <div class='row'>
+    <div class='col-md-12'>
+
 <%= form_with model: post, local: true do |f| %>
 
   <div class="field">
@@ -21,12 +25,12 @@
 
   <div class="form-group">
     <%= f.label :sauna_temperature,"サウナ温度" %><br />
-    <%= f.select :sauna_temperature,[["80°", "80°"], ["85°", "85°"], ["90°", "90°"],["95°", "95°"],["それ以上", "それ以上"]], include_blank: "選択して下さい",class:"form-control" %>
+    <%= f.select :sauna_temperature,[["80℃", "80℃"], ["85℃", "85℃"], ["90℃", "90℃"],["95℃", "95℃"],["それ以上", "それ以上"]], include_blank: "選択して下さい",class:"form-control" %>
   </div></br>
 
   <div class="form-group">
     <%= f.label :water_bath_temperature,"水風呂温度" %><br />
-    <%= f.select :water_bath_temperature,[["20°", "20°"], ["15°", "15°"], ["13°", "13°"],["10°", "10°"],["その他", "その他"]], include_blank: "選択して下さい",class:"form-control" %>
+    <%= f.select :water_bath_temperature,[["20℃", "20℃"], ["15℃", "15℃"], ["13℃", "13℃"],["10℃", "10℃"],["その他", "その他"]], include_blank: "選択して下さい",class:"form-control" %>
   </div></br>
 
   <div class="form-group">
@@ -45,7 +49,7 @@
   </div></br>
 
   <div class="form-group">
-    <%= f.label :vending_machine,"瓶自動販売機" %><br />
+    <%= f.label :vending_machine,"瓶ジュース" %><br />
     <%= f.select :vending_machine,[["ある", "ある"], ["ない", "ない"]], include_blank: "選択して下さい",class:"form-control" %>
   </div></br>
 
@@ -57,11 +61,17 @@
     <%= f.submit "投稿" %>
   </div>
 <% end %>
+
+   </div>
+  </div>
+</div>
+
 <script>
   $('#evaluate_stars').raty({
     starOn: "<%= asset_path('star-on.png') %>",
     starOff: "<%= asset_path('star-off.png') %>",
     starHalf: "<%= asset_path('star-half.png') %>",
-    scoreName: 'post[evaluation]' //登録するモデル名とカラム名を記述
+    scoreName: 'post[evaluation]', //登録するモデル名とカラム名を記述
+    score:<%= post.evaluation %>
   });
 </script>

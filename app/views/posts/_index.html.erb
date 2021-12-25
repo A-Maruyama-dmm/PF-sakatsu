@@ -2,12 +2,12 @@
 <div>
   <%= link_to post_path(post.id) do %>
   <tr>
-      <td><%= attachment_image_tag post, :sauna_image, format: 'jpeg', size: "300x300" %></td>
-      <td><%= post.sauna_name %></td>
+      <th><%= attachment_image_tag post, :sauna_image, format: 'jpeg', size: "270x270" %></th>
+      <th><%= post.sauna_name %></th>
       <% end %>
-      <td><%= post.url %></td>
-      <td class="post_evaluation" data-score="<%= post.evaluation %>"></td>
-      <td>
+      <th><%= link_to post.url, post.url %></th>
+      <th class="post_evaluation" data-score="<%= post.evaluation %>"></th>
+      <th>
         <% if current_user.admin %>
           <%= link_to posts_change_auth_path(id: post.id) do %>
             <% if post.authorization %>
@@ -23,10 +23,10 @@
             <i class="far fa-star"></i>
           <% end %>
         <% end %>
-      </td>
-      <td><%= link_to "#{post.comments.count} 件", post_path(post.id) %></td>
-      <td id="like_buttons_<%= post.id %>" nowrap><%= render "likes/likes", post: post %></td>
-　    <td><%= link_to 'Show', post_path(post), class: "post_#{post.id}" %></td>
+      </th>
+      <th><i class="far fa-comment-dots"></i><%= link_to "#{post.comments.count}件 ", post_path(post.id) %></th>
+      <th id="like_buttons_<%= post.id %>" nowrap><%= render "likes/likes", post: post %></th>
+　    <th><%= link_to '詳細', post_path(post), class: "btn btn-sm btn-info post_#{post.id}" %></th>
   </tr>
 </div>
 <% end %>

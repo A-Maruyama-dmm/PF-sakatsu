@@ -1,3 +1,85 @@
 // Place all the styles related to the user/homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.top-bg {
+  background-image: image-url('huum-Ruso6EXMC5U-unsplash.jpg');
+  height: 800px;
+  background-size: cover;
+  position: relative;
+}
+
+.top-container {
+
+  height: auto;
+}
+
+.top-bg::before {
+  content: '';
+  /* ↓暗いオーバーレイを半透明で配置 */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* ↓全体を覆うように配置 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 75px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  color: #a9a9a9;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.introduction{
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+
+}
+
+
+.top-about {
+  background-image: image-url('bench-g3fc70e1b0_1920.jpg');
+  height: 800px;
+  background-size: cover;
+  position: relative;
+}
+
+.top-about::before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.about{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.section{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.fab{
+  font-size: 70px;
+}

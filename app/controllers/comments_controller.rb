@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.post_id = @post.id
     if @comment.save
-    redirect_to posts_path(@post)
+    redirect_to post_path(@post)
     else
     render 'posts/show'
     end
@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
    Comment.find_by(id: params[:id]).destroy
-    redirect_to posts_path(params[:post_id])
+    redirect_to post_path(params[:post_id])
   end
 
   private

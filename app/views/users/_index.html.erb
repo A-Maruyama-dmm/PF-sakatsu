@@ -3,23 +3,21 @@
     <tr>
       <th></th>
       <th>氏名</th>
-      <th>年齢</th>
+      <th class=text-right>年齢</th>
+      <th class="text-right">サウナ歴</th>
+      <th class="text-right">セット回数</th>
       <th></th>
-      <th>セット回数</th>
-      <th></th>
-      <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
     <% users.each do |user| %>
       <tr>
-        <td><%= attachment_image_tag(user, :image, :fill, 50, 50, fallback: "no_image.jpg") %></td>
-        <td><%= user.name %></td>
-        <td><%= user.age %>歳</td>
-        <td><%= user.sauna_years %></td>
-        <td><%= user.number_of_sets %></td>
-
-        <td><%= link_to '詳細', user_path(user), class: "user_#{user.id}" %></td>
+        <th><%= attachment_image_tag(user, :image, :fill, 80, 80, fallback: "no_image.jpg") %></th>
+        <th><%= user.name %></th>
+        <th class="text-right"><%= user.age %>歳</td>
+        <th class="text-right"><%= user.sauna_years %></td>
+        <th class="text-right"><%= user.number_of_sets %></td>
+        <th><%= link_to '詳細', user_path(user), class: "user_#{user.id}" %></th>
       </tr>
     <% end %>
   </tbody>

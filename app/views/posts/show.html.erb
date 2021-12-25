@@ -4,8 +4,11 @@
     <div class='col-md-12'>
 
   		<h2>投稿</h2>
-  		<table class="table table-striped">
-  		    <div class="p-2 bd-highlight"><%= link_to "ユーザー一覧", users_path %></div>
+  		      <div class="d-flex justify-content-end"> <div id="like_buttons_<%= @post.id %>" nowrap><%= render "likes/likes", post: @post %></div></div>
+  		      <div class="d-flex justify-content-end"> <% if current_user.id == @user.id %>
+            <div><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></div>
+            <div><%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}"%></div>
+            <% end %></div>
   		    <div class="d-flex justify-content-end">by<%= @post.user.name %></div>
   		    <div class="d-flex justify-content-center">[<%= @post.sauna_name %>]
   		       <% if current_user.admin %>
@@ -24,82 +27,73 @@
                 <% end %>
               <% end %></div>
   		      <div class="d-flex justify-content-center"><%= attachment_image_tag(@post, :sauna_image, :fill, 700, 500, fallback: "no_image.jpg") %></div></br>
-            <div class="d-flex justify-content-center">住所：<%= @post.address %></div>
-            <div class="d-flex justify-content-center">HP：<%= @post.url %></div>
-            <div class="d-flex justify-content-center">サウナ温度：<%= @post.sauna_temperature %></div>
-            <div class="d-flex justify-content-center">水風呂温度：<%= @post.water_bath_temperature %></div>
-            <div class="d-flex justify-content-center">外気浴：<%= @post.outside_air_bath %></div>
-            <div class="d-flex justify-content-center">混雑具合:<%= @post.congestion %></div>
-            <div class="d-flex justify-content-center">時間帯：<%= @post.time_zorn %></div>
-            <div class="d-flex justify-content-center">瓶ジュース：<%= @post.vending_machine %></div>
-            <div class="d-flex justify-content-center"></div>
+            <div class="d-flex justify-content-center">住所<i class="fas fa-location-arrow"></i>[<%= @post.address %>]</div>
+            <div class="d-flex justify-content-center">HP<i class="fas fa-link"></i>[<%=link_to @post.url, @post.url %>]</div>
+            <div class="d-flex justify-content-center">サウナ温度<i class="fas fa-hot-tub"></i>[<%= @post.sauna_temperature %>]</div>
+            <div class="d-flex justify-content-center">水風呂温度<i class="fas fa-temperature-low"></i>[<%= @post.water_bath_temperature %>]</div>
+            <div class="d-flex justify-content-center">外気浴<i class="fas fa-chair"></i>[<%= @post.outside_air_bath %>]</div>
+            <div class="d-flex justify-content-center">混雑具合<i class="fas fa-user-alt-slash"></i>[<%= @post.congestion %>]</div>
+            <div class="d-flex justify-content-center">時間帯<i class="fas fa-clock"></i>[<%= @post.time_zorn %>]</div>
+            <div class="d-flex justify-content-center">瓶ジュース<i class="fas fa-wine-glass-alt"></i>[<%= @post.vending_machine %>]</div>
+            <div class="d-flex justify-content-center">総合評価<i class="fas fa-check-circle"></i>[
+            <div class="post_evaluation" data-score="<%= @post.evaluation %>"></div>]</div>
 
-            <td class="post_evaluation" data-score="<%= @post.evaluation %>"></td>
 
-            <td>
+
+            <div class="row">
+              <div class="offset-md-8 col-md-4">
               <%= form_with(model:[@post, @comment], local: true) do |f| %>
-              <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+              <%= f.text_area :comment, rows:'3',placeholder: "コメントをここに" %>
               <%= f.submit "送信する" %>
               <% end %>
-            </td>
-  　　   　　　<td id="like_buttons_<%= @post.id %>" nowrap><%= render "likes/likes", post: @post %></td>
-            <% if current_user.id == @user.id %>
-            <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success edit_book_#{@post.id}" %></td>
-            <td><%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}"%></td>
-            <% end %>
-
-      </table>
-
-
-
-            <div class="d-flex justify-content-end"><i class="far fa-comment-dots"></i>✖︎<%= @post.comments.count %></p>,
-            <% @post.comments.each do |comment| %>
-              <%= comment.created_at.strftime('%Y/%m/%d') %></br>
-              <%= comment.comment %>
-              by<%= comment.user.name %>
-              <% if comment.user == current_user %>
-              <div>
-                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-              <% end %>
               </div>
+              <div class="col-md-6">
+                <div id= "map">
+              </div>
+              </div>
+              <div class=" col-md-6"><i class="far fa-comment-dots"></i>︎<%= @post.comments.count %>
+              <table class="table">
+                <% @post.comments.each do |comment| %>
+                 <tr>
+                  <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+                  <td><%= comment.comment %></td>
+                  <td>by<%= comment.user.name %></td>
+                  <td><% if comment.user == current_user %>
+                      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+                      <% end %>
+                  </td>
+                 </tr>
+                <% end %>
+              </table>
+                 </div>
+            </div>
 
-            <% end %></div>
 
 
-        <div id= "map">
 
+        <script>
+        $('.post_evaluation').raty({
+          readOnly: true,
+          score: function() {
+            return $(this).attr('data-score');
+          },
+          path: '/assets/'
+        });
+      　</script>
+      　<style>
+          #map {
+            height: 400px;
+            width: 100%;
+          }
+        </style>
+        <script>
+        var map;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: gon.post.latitude, lng: gon.post.longitude},
+            zoom: 8
+          });
+        }
+      　</script>
 
-        </div>
-
-
-        </div>
-        <div>
-        </div>
-    </div>
-  </div>
-  <script>
-  $('.post_evaluation').raty({
-    readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
-　</script>
-　<style>
-    #map {
-      height: 400px;
-      width: 600px;
-    }
-  </style>
-  <script>
-  var map;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: gon.post.latitude, lng: gon.post.longitude},
-      zoom: 8
-    });
-  }
-</script>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAP_API']%>&callback=initMap"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAP_API']%>&callback=initMap"></script>
