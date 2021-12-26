@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     flash[:success] = "You have created book successfully."
     else
       @posts = Post.all
-    render 'index'
+    render 'new'
     end
   end
 

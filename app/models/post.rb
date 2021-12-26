@@ -15,4 +15,16 @@ class Post < ApplicationRecord
   def liked(user)
     likes.find_by(user_id: user.id)
   end
+
+  validates :sauna_name, presence: true
+  validates :address, presence: true
+  validates :url, presence: true
+  validates :sauna_image, presence: true
+  validates :sauna_temperature, presence: true
+  validates :water_bath_temperature, presence: true
+  validates :outside_air_bath, presence: true
+  validates :congestion, presence: true
+  validates :time_zorn, presence: true
+  validates :vending_machine, presence: true
+  validates :evaluation, presence: true
 end
