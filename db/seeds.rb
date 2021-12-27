@@ -10,5 +10,8 @@ User.create!(
    email: 'test@test',
    password: 'ssssss',
    name: 'サウナ管理者',
+   age: 40,
+   sauna_years: '7年目',
+   number_of_sets: '3回',
    admin: true
 )
