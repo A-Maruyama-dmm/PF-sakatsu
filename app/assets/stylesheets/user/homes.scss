@@ -9,11 +9,6 @@
   position: relative;
 }
 
-.top-container {
-
-  height: auto;
-}
-
 .top-bg::before {
   content: '';
   /* ↓暗いオーバーレイを半透明で配置 */
@@ -26,6 +21,12 @@
   height: 100%;
   display: block;
 }
+
+.top-container {
+
+  height: auto;
+}
+
 
 .text {
   position: absolute;
