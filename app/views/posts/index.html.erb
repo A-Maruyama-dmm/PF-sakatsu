@@ -20,6 +20,7 @@
   </div>
 </div>
 
+
   <script>
     $('.post-evaluation').raty({
       readOnly: true,
@@ -30,3 +31,4 @@
     });
   </script>
   <%= render 'layouts/fixed_btn' %>
+  <%= paginate @posts %>

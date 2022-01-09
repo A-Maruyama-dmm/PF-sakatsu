@@ -20,17 +20,17 @@
 
 .fixed_btn {
  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  padding: 6px 40px;
+ bottom: 10px;
+ right: 10px;
+ padding: 6px 40px;
 
 }
 .new_btn{
  font-size: 80px;
  color: blue;
 
-  &:hover{
-   color:red;
+ &:hover{
+ color:green;
   }
 }
 
