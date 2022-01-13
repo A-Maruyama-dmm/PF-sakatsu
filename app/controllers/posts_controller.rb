@@ -73,7 +73,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:sauna_name, :address, :url, :sauna_image, :sauna_temperature, :water_bath_temperature, :outside_air_bath, :congestion, :time_zorn, :vending_machine, :evaluation, :comment, :likes)
+    params.require(:post).permit(:sauna_name, :address, :url, :sauna_image, :sauna_temperature, :water_bath_temperature, :outside_air_bath, :congestion, :time_zorn, :vending_machine, :evaluation, :comment, :likes, :latitude, :longitude)
   end
 
 
