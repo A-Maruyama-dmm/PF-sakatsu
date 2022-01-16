@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def index
+    @user = User.page(params[:page])
     @users = User.all
     @post = Post.new
   end
