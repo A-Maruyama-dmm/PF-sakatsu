@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   registrations: "user/registrations",
   sessions: 'user/sessions'
 }
-  #管理者用
-  #devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
-  #sessions: "admin/sessions"
-#}
+ 
 
   root to: 'user/homes#top'
   get 'homes/about' => 'user/homes#about'
@@ -25,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   get '/posts/change_auth', to: 'posts#change_auth'
+  get "search" => "searches#search"
 
   resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     resources :comments, only: [:create, :destroy]

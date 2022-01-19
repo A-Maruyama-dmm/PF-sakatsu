@@ -16,8 +16,8 @@
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
- 
- 
+
+
   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
  @media screen and (max-width:1024px) {
  }
@@ -50,7 +50,7 @@ header{
  position: fixed;
  top: 0;
  z-index:999;//999階にいるイメージ
- 
+
 }
 
 .main{

@@ -15,6 +15,19 @@ class Post < ApplicationRecord
   def liked(user)
     likes.find_by(user_id: user.id)
   end
+  
+  # 検索方法分岐
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Post.where(sauna_name: content)
+    elsif method == 'forward'
+      Post.where('sauna_name LIKE ?', content+'%')
+    elsif method == 'backward'
+      Post.where('sauna_name LIKE ?', '%'+content)
+    else
+      Post.where('sauna_name LIKE ?', '%'+content+'%')
+    end
+  end
 
   validates :sauna_name, presence: true
   validates :address, presence: true
