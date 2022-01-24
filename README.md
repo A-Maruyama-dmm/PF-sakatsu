@@ -20,8 +20,6 @@
 
 自分が行ったサウナの感想を誰かに共有したい時や、他ユーザが気に入っているサウナの情報を知りたい時など。またサウナを通じた交流の場としても活用できます。
 
-## 設計書
-
 ## チャレンジ要素一覧
 
 https://docs.google.com/spreadsheets/d/1ybq8PZ3w0rsUQl4tTeH3I8FQv_0fjFjNEhOkCD053LE/edit#gid=566224576
