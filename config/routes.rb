@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root to: 'user/homes#top'
   get 'homes/about' => 'user/homes#about'
   get 'user/mypage' => 'user#mypage'
+  get '/search', to: 'searchs#search'
 
 
   # 会員側のルーティング設定
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   get '/posts/change_auth', to: 'posts#change_auth'
-  get "search" => "searches#search"
+  
 
   resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     resources :comments, only: [:create, :destroy]
